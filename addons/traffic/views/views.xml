@@ -1,0 +1,59 @@
+<openerp>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="trafic.list">
+      <field name="name">trafic list</field>
+      <field name="model">trafic.trafic</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="trafic.action_window">
+      <field name="name">trafic window</field>
+      <field name="res_model">trafic.trafic</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="trafic.action_server">
+      <field name="name">trafic server</field>
+      <field name="model_id" ref="model_trafic_trafic"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="trafic" id="trafic.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="trafic.menu_1" parent="trafic.menu_root"/>
+    <menuitem name="Menu 2" id="trafic.menu_2" parent="trafic.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="trafic.menu_1_list" parent="trafic.menu_1"
+              action="trafic.action_window"/>
+    <menuitem name="Server to list" id="trafic" parent="trafic.menu_2"
+              action="trafic.action_server"/>
+    -->
+  </data>
+</openerp>

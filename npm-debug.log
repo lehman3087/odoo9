@@ -1,0 +1,81 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'lessc' ]
+2 info using npm@1.4.29
+3 info using node@v0.10.41-nightly20151203036580393d
+4 warn deprecated This version of npm lacks support for important features,
+5 warn deprecated such as scoped packages, offered by the primary npm
+6 warn deprecated registry. Consider upgrading to at least npm@2, if not the
+7 warn deprecated latest stable version. To upgrade to npm@2, run:
+8 warn deprecated npm -g install npm@latest-2
+9 warn deprecated To upgrade to the latest stable version, run:
+10 warn deprecated npm -g install npm@latest
+11 warn deprecated (Depending on how Node.js was installed on your system, you
+12 warn deprecated may need to prefix the preceding commands with `sudo`, or if
+13 warn deprecated on Windows, run them from an Administrator prompt.)
+14 warn deprecated If you're running the version of npm bundled with
+15 warn deprecated Node.js 0.10 LTS, be aware that the next version of 0.10 LTS
+16 warn deprecated will be bundled with a version of npm@2, which has some small
+17 warn deprecated backwards-incompatible changes made to `npm run-script` and
+18 warn deprecated semver behavior.
+19 verbose cache add [ 'lessc', null ]
+20 verbose cache add name=undefined spec="lessc" args=["lessc",null]
+21 verbose parsed url { protocol: null,
+21 verbose parsed url   slashes: null,
+21 verbose parsed url   auth: null,
+21 verbose parsed url   host: null,
+21 verbose parsed url   port: null,
+21 verbose parsed url   hostname: null,
+21 verbose parsed url   hash: null,
+21 verbose parsed url   search: null,
+21 verbose parsed url   query: null,
+21 verbose parsed url   pathname: 'lessc',
+21 verbose parsed url   path: 'lessc',
+21 verbose parsed url   href: 'lessc' }
+22 silly lockFile 8b3a335c-lessc lessc
+23 verbose lock lessc /Users/guizhouyuntushidai/.npm/8b3a335c-lessc.lock
+24 silly lockFile 8b3a335c-lessc lessc
+25 silly lockFile 8b3a335c-lessc lessc
+26 verbose addNamed [ 'lessc', '' ]
+27 verbose addNamed [ null, '*' ]
+28 silly lockFile a47c36bc-lessc lessc@
+29 verbose lock lessc@ /Users/guizhouyuntushidai/.npm/a47c36bc-lessc.lock
+30 silly addNameRange { name: 'lessc', range: '*', hasData: false }
+31 verbose request where is /lessc
+32 verbose request registry https://registry.npmjs.org/
+33 verbose request id 19ef7a386a40583d
+34 verbose url raw /lessc
+35 verbose url resolving [ 'https://registry.npmjs.org/', './lessc' ]
+36 verbose url resolved https://registry.npmjs.org/lessc
+37 verbose request where is https://registry.npmjs.org/lessc
+38 info trying registry request attempt 1 at 16:00:23
+39 http GET https://registry.npmjs.org/lessc
+40 http 404 https://registry.npmjs.org/lessc
+41 silly registry.get cb [ 404,
+41 silly registry.get   { 'content-type': 'application/json',
+41 silly registry.get     'cache-control': 'max-age=0',
+41 silly registry.get     'content-length': '2',
+41 silly registry.get     'accept-ranges': 'bytes',
+41 silly registry.get     date: 'Sat, 09 Jan 2016 08:00:26 GMT',
+41 silly registry.get     via: '1.1 varnish',
+41 silly registry.get     age: '0',
+41 silly registry.get     connection: 'keep-alive',
+41 silly registry.get     'x-served-by': 'cache-nrt6130-NRT',
+41 silly registry.get     'x-cache': 'MISS',
+41 silly registry.get     'x-cache-hits': '0',
+41 silly registry.get     'x-timer': 'S1452326426.045934,VS0,VE190' } ]
+42 silly lockFile a47c36bc-lessc lessc@
+43 silly lockFile a47c36bc-lessc lessc@
+44 error 404 Not Found
+44 error 404
+44 error 404 'lessc' is not in the npm registry.
+44 error 404 You should bug the author to publish it
+44 error 404
+44 error 404 Note that you can also install from a
+44 error 404 tarball, folder, or http url, or git url.
+45 error System Darwin 14.5.0
+46 error command "node" "/usr/local/bin/npm" "install" "lessc"
+47 error cwd /Users/guizhouyuntushidai/PycharmProjects/lehman/odoo
+48 error node -v v0.10.41-nightly20151203036580393d
+49 error npm -v 1.4.29
+50 error code E404
+51 verbose exit [ 1, true ]

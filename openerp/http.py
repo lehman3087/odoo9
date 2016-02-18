@@ -640,6 +640,7 @@ class JsonRequest(WebRequest):
            to arbitrary responses. Anything returned (except None) will
            be used as response."""
         try:
+            # print JsonRequest
             return super(JsonRequest, self)._handle_exception(exception)
         except Exception:
             if not isinstance(exception, (openerp.exceptions.Warning, SessionExpiredException, openerp.exceptions.except_orm)):

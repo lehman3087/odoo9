@@ -92,8 +92,6 @@ var JournalDashboardGraph = kanban_widgets.AbstractField.extend({
     },
 
 });
-
-
 kanban_widgets.registry.add('dashboard_graph', JournalDashboardGraph);
 
 });

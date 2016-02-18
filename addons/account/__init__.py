@@ -7,6 +7,8 @@ import wizard
 import report
 from openerp import SUPERUSER_ID
 
+
+
 def _auto_install_l10n(cr, registry):
     #check the country of the main company (only) and eventually load some module needed in that country
     country_code = registry['res.users'].browse(cr, SUPERUSER_ID, SUPERUSER_ID, {}).company_id.country_id.code

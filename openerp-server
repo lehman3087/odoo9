@@ -2,5 +2,8 @@
 import openerp
 
 if __name__ == "__main__":
-    openerp.cli.main()
+     openerp.cli.main()
+
+    #openerp.tools.autoreload_main(openerp.cli.main)
+
 

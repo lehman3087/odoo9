@@ -1631,6 +1631,10 @@ class Many2one(_Relational):
     }
 
     def __init__(self, comodel_name=None, string=None, **kwargs):
+        """
+
+        :rtype : object
+        """
         super(Many2one, self).__init__(comodel_name=comodel_name, string=string, **kwargs)
 
     def _setup_attrs(self, model, name):

@@ -154,7 +154,8 @@ def main():
         cmds[sys.argv[1]]()
     else:
         import openerp
-        openerp.cli.main()
+        openerp.tools.autoreload_main(openerp.cli.main)
+        # openerp.cli.main()
 
 if __name__ == "__main__":
     main()

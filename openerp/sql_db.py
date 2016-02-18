@@ -597,6 +597,7 @@ def dsn(db_or_uri):
 _Pool = None
 
 def db_connect(to, allow_uri=False):
+    print to
     global _Pool
     if _Pool is None:
         _Pool = ConnectionPool(int(tools.config['db_maxconn']))

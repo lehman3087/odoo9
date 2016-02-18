@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_outlets_maps2_outlets_maps2,outlets_maps2.outlets_maps2,model_outlets_maps2_outlets_maps2,,1,0,0,0
