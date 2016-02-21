@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Kovács Tibor <kovika@gmail.com>, 2015
+# Kris Krnacs, 2015-2016
 # Kris Krnacs, 2015
-# Kris Krnacs, 2015
+# Martin Trigaux, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-17 14:09+0000\n"
-"PO-Revision-Date: 2015-12-30 21:57+0000\n"
+"PO-Revision-Date: 2016-02-12 10:44+0000\n"
 "Last-Translator: Kris Krnacs\n"
 "Language-Team: Hungarian (http://www.transifex.com/odoo/odoo-9/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -1450,6 +1451,7 @@ msgstr "Analitikus számla használatának engedélyezése."
 #: model:ir.model.fields,field_description:account.field_account_tax_template_amount
 #: model:ir.model.fields,field_description:account.field_cash_box_in_amount
 #: model:ir.model.fields,field_description:account.field_cash_box_out_amount
+#: model:ir.ui.view,arch_db:account.report_invoice_document
 #: model:ir.ui.view,arch_db:account.view_move_line_form
 #, python-format
 msgid "Amount"
@@ -1641,9 +1643,8 @@ msgstr "Jóváírás, visszatérítés igénylése"
 msgid ""
 "Asset management: This allows you to manage the assets owned by a company or a person. It keeps track of the depreciation occurred on those assets, and creates account move for those depreciation lines.\n"
 "\n"
-"Revenue recognition: This allows you to manage the Revenue recognition on selling product. It keeps track of the installment occurred on those revenue recognition, and creates account move for those installment lines.\n"
 "-This installs the module account_asset. If you do not check this box, you will be able to do invoicing & payments, but not accounting (Journal Items, Chart of Accounts, ...)"
-msgstr "Tárgyi eszköz kezelés: Ez lehetővé teszi a vállalat vagy személy által birtokolt vagyoni eszközök kezelését. Nyomon követi a vagyoni eszközökön történt értékcsökkenést, és számla mozgásokat hoz létre ezekre az érték csökkent tétel sorokra.\n\nBevétel  aktiválás: Ez lehetővé teszi a Bevétel aktiválását az értékesített termékekre. Nyomon követi a Bevétel aktiváláskor keletkezett részleteket, és létrehozza a főkönyvi számlán a költségszámla mozgást ezekre a részlet tételsorokra.\n-Ez a account_asset modult telepíti. Ha nem jelöli be ezt a négyzetet, akkor lehetősége lesz számlázásra & kifizetésekre, de könyvelésre nem (Napló tételek, Számlatükör, ...)"
+msgstr "Tárgyi eszközök ketelése: Ez lehetővé teszi a vállalat vagy személy által birtokolt vagyoni eszközök kezelését. Nyomon követi a vagyoni eszközökön történt értékcsökkenést, és számla mozgásokat hoz létre ezekre az érték csökkent tétel sorokra.\n\n -Ez a account_asset modult telepíti. Ha nem jelöli be ezt a négyzetet, akkor lehetősége lesz számlázásra & kifizetésekre, de könyvelésre nem (Napló tételek, Számlatükör, ...)"
 
 #. module: account
 #: model:account.financial.report,name:account.account_financial_report_assets0
@@ -1652,8 +1653,8 @@ msgstr "Eszközök"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_config_settings_module_account_asset
-msgid "Assets management & Revenue recognition"
-msgstr "Tárgyi-eszköz kezelés /Bevétel aktiválás"
+msgid "Assets management"
+msgstr "Tárgyi eszközök kezelése"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_chart_template_account_ids
@@ -4692,7 +4693,7 @@ msgstr "Számlák & Fizetések könyvelői párosítása"
 #. module: account
 #: model:ir.ui.view,arch_db:account.account_journal_dashboard_kanban_view
 msgid "Invoices &amp; Refunds"
-msgstr "Számlák & visszatérítések"
+msgstr "Számlák &amp; visszatérítések"
 
 #. module: account
 #: model:ir.actions.act_window,name:account.action_account_invoice_report_all
@@ -7580,6 +7581,7 @@ msgstr "Figyelembe vett bizonylat tételek"
 #: model:ir.model.fields,field_description:account.field_account_invoice_tax_tax_id
 #: model:ir.model.fields,field_description:account.field_account_operation_template_second_tax_id
 #: model:ir.model.fields,field_description:account.field_account_operation_template_tax_id
+#: model:ir.ui.view,arch_db:account.report_invoice_document
 #: model:ir.ui.view,arch_db:account.view_account_tax_search
 #, python-format
 msgid "Tax"

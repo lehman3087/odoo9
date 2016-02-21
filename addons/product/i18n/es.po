@@ -4,13 +4,15 @@
 # 
 # Translators:
 # Antonio Trueba, 2015-2016
+# Jesus Alan Ramos Rodriguez <alan.ramos@jarsa.com.mx>, 2016
+# Martin Trigaux, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-29 10:26+0000\n"
-"PO-Revision-Date: 2016-01-02 12:34+0000\n"
-"Last-Translator: Antonio Trueba\n"
+"PO-Revision-Date: 2016-01-31 16:59+0000\n"
+"Last-Translator: Jesus Alan Ramos Rodriguez <alan.ramos@jarsa.com.mx>\n"
 "Language-Team: Spanish (http://www.transifex.com/odoo/odoo-9/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -152,7 +154,7 @@ msgstr "<span>kg</span>"
 #. module: product
 #: model:ir.ui.view,arch_db:product.report_pricelist
 msgid "<strong>Currency</strong>:<br/>"
-msgstr "<strong>Moneda</strong>:<br>"
+msgstr "<strong>Moneda</strong>:<br/>"
 
 #. module: product
 #: model:ir.ui.view,arch_db:product.report_pricelist
@@ -347,7 +349,7 @@ msgstr "Coste servicio ensamblaje"
 #. module: product
 #: model:ir.model.fields,help:product.field_product_supplierinfo_sequence
 msgid "Assigns the priority to the list of product vendor."
-msgstr ""
+msgstr "Asigna la prioridad a la lista de productos de proveedor"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_attribute_line_attribute_id
@@ -682,6 +684,12 @@ msgid "Computers"
 msgstr "Ordenadores"
 
 #. module: product
+#: code:addons/product/product.py:460
+#, python-format
+msgid "Consumable"
+msgstr ""
+
+#. module: product
 #: model:ir.model.fields,help:product.field_product_uom_category_id
 msgid ""
 "Conversion between Units of Measure can only occur if they belong to the "
@@ -948,7 +956,7 @@ msgstr "Fecha final"
 #. module: product
 #: model:ir.model.fields,help:product.field_product_supplierinfo_date_end
 msgid "End date for this vendor price"
-msgstr ""
+msgstr "Fecha final para este precio de proveedor"
 
 #. module: product
 #: selection:product.template,state:0
@@ -1493,7 +1501,7 @@ msgstr "Es un seguidor"
 #: model:ir.model.fields,field_description:product.field_product_product_is_product_variant
 #: model:ir.model.fields,field_description:product.field_product_template_is_product_variant
 msgid "Is a product variant"
-msgstr ""
+msgstr "Es una variante de producto"
 
 #. module: product
 #: model:product.product,website_description:product.product_product_7
@@ -2495,6 +2503,12 @@ msgid "Server"
 msgstr "Servidor"
 
 #. module: product
+#: code:addons/product/product.py:460
+#, python-format
+msgid "Service"
+msgstr ""
+
+#. module: product
 #: model:ir.ui.view,arch_db:product.product_template_search_view
 #: model:product.category,name:product.product_category_3
 #: model:product.public.category,name:product.services
@@ -3123,7 +3137,7 @@ msgstr "Variantes"
 #: model:ir.model.fields,field_description:product.field_product_template_seller_ids
 #: model:ir.ui.view,arch_db:product.product_supplierinfo_form_view
 msgid "Vendor"
-msgstr "Vendedor"
+msgstr "Proveedor"
 
 #. module: product
 #: model:ir.ui.view,arch_db:product.product_supplierinfo_form_view
@@ -3217,7 +3231,7 @@ msgstr ""
 msgid ""
 "When this field is filled in, the vendor data will only apply to the "
 "variant."
-msgstr ""
+msgstr "Cuando este campo es llenado, los datos del proveedor solo aplicaran en la variante."
 
 #. module: product
 #: model:product.attribute.value,name:product.product_attribute_value_3

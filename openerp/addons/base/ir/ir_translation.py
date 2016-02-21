@@ -9,7 +9,7 @@ from openerp import api, tools
 import openerp.modules
 from openerp.osv import fields, osv
 from openerp.tools.translate import _
-from openerp.exceptions import AccessError, UserError
+from openerp.exceptions import AccessError, UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -129,7 +129,6 @@ class ir_translation_import_cursor(object):
         find_expr = """
                 irt.lang = ti.lang
             AND irt.type = ti.type
-            AND irt.module = ti.module
             AND irt.name = ti.name
             AND (
                     (ti.type = 'model' AND ti.res_id = irt.res_id AND irt.src = ti.src)
@@ -533,13 +532,24 @@ class ir_translation(osv.osv):
             records.check_field_access_rights(fmode, model_fields[mname])
             records.check_access_rule(fmode)
 
+    @api.constrains('type', 'name', 'value')
+    def _check_value(self):
+        for trans in self.with_context(lang=None):
+            if trans.type == 'model' and trans.value:
+                mname, fname = trans.name.split(',')
+                record = trans.env[mname].browse(trans.res_id)
+                field = record._fields[fname]
+                if callable(field.translate):
+                    # check whether applying (trans.src -> trans.value) then
+                    # (trans.value -> trans.src) gives the original value back
+                    value0 = field.translate(lambda term: None, record[fname])
+                    value1 = field.translate({trans.src: trans.value}.get, value0)
+                    value2 = field.translate({trans.value: trans.src}.get, value1)
+                    if value2 != value0:
+                        raise ValidationError(_("Translation is not valid:\n%s") % trans.value)
+
     @api.model
     def create(self, vals):
-        if vals.get('type') == 'model' and vals.get('value'):
-            # check and sanitize value
-            mname, fname = vals['name'].split(',')
-            field = self.env[mname]._fields[fname]
-            vals['value'] = field.check_trans_value(vals['value'])
         record = super(ir_translation, self.sudo()).create(vals).with_env(self.env)
         record.check('create')
         self.clear_caches()
@@ -549,13 +559,6 @@ class ir_translation(osv.osv):
     def write(self, vals):
         if vals.get('value'):
             vals.setdefault('state', 'translated')
-            ttype = vals.get('type') or self[:1].type
-            if ttype == 'model':
-                # check and sanitize value
-                name = vals.get('name') or self[:1].name
-                mname, fname = name.split(',')
-                field = self.env[mname]._fields[fname]
-                vals['value'] = field.check_trans_value(vals['value'])
         elif vals.get('src') or not vals.get('value', True):
             vals.setdefault('state', 'to_translate')
         self.check('write')
@@ -713,3 +716,29 @@ class ir_translation(osv.osv):
                     _logger.info('module %s: loading extra translation file (%s) for language %s', module_name, lang_code, lang)
                     tools.trans_load(cr, trans_extra_file, lang, verbose=False, module_name=module_name, context=context)
         return True
+
+    @api.model
+    def get_technical_translations(self, model_name):
+        """ Find the translations for the fields of `model_name`
+
+        Find the technical translations for the fields of the model, including
+        string, tooltip and available selections.
+
+        :return: action definition to open the list of available translations
+        """
+        fields = self.env['ir.model.fields'].search([('model', '=', model_name)])
+        view = self.env.ref("base.view_translation_tree", False)
+        return {
+            'name': _("Technical Translation"),
+            'view_mode': 'tree',
+            'views': [(view and view.id or False, "list")],
+            'res_model': 'ir.translation',
+            'type': 'ir.actions.act_window',
+            'domain': ['|',
+                            '&',('type', '=', 'model'),
+                                '&',('res_id', 'in', fields.ids),
+                                    ('name', 'like', 'ir.model.fields,'),
+                            '&',('type', '=', 'selection'),
+                                ('name', 'like', model_name+','),
+                    ],
+        }

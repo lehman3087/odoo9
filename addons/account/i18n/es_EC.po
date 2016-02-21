@@ -14,14 +14,14 @@
 # Manuel Gómez <nuelgoz@gmail.com>, 2015
 # Oihane Crucelaegui <oihanecruce@gmail.com>, 2015
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
-# Rick Hunter <rick_hunter_ec@yahoo.com>, 2015
+# Rick Hunter <rick_hunter_ec@yahoo.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-17 14:09+0000\n"
-"PO-Revision-Date: 2015-12-29 08:48+0000\n"
-"Last-Translator: Martin Trigaux\n"
+"PO-Revision-Date: 2016-02-12 07:50+0000\n"
+"Last-Translator: Rick Hunter <rick_hunter_ec@yahoo.com>\n"
 "Language-Team: Spanish (Ecuador) (http://www.transifex.com/odoo/odoo-9/language/es_EC/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,7 +95,7 @@ msgid ""
 " * The 'Open' status is used when user create invoice, an invoice number is generated. Its in open status till user does not pay invoice.\n"
 " * The 'Paid' status is set automatically when the invoice is paid. Its related journal entries may or may not be reconciled.\n"
 " * The 'Cancelled' status is used when user cancel invoice."
-msgstr "* El estado 'Borrador' se usa cuando un usuario está introduciendo una nueva factura no confirmada.\n* El estado 'Pro-forma' se usa cuando la factura no tiene un número asignado.\n* El estado 'Abierta' se usa cuando el usuario crea la factura y la confirma. Se genera un número de factura y su estado permanecerá así hasta que el usuario pague la factura.\n* El estado 'Pagada' se establece automáticamente cuando se paga la factura. Sus correspondientes asientos pueden o no estar conciliados.\n* El estado 'Cancelada' se usa cuando el usuario cancela la factura."
+msgstr "* El estado 'Borrador' se usa cuando un usuario está introduciendo una nueva factura no confirmada.\n* El estado 'Cotización' se usa cuando la factura no tiene un número asignado.\n* El estado 'Abierta' se usa cuando el usuario crea la factura y la confirma. Se genera un número de factura y su estado permanecerá así hasta que el usuario pague la factura.\n* El estado 'Pagada' se establece automáticamente cuando se paga la factura. Sus correspondientes asientos pueden o no estar conciliados.\n* El estado 'Cancelada' se usa cuando el usuario cancela la factura."
 
 #. module: account
 #. openerp-web
@@ -215,7 +215,7 @@ msgid ""
 "                                        <strong>Import a file</strong><br/>\n"
 "                                        <span class=\"small\">Recommended if &gt;100 products</span>\n"
 "                                    </span>"
-msgstr "<span class=\"panel-title\">\n<span class=\"fa\" data-icon=\"&#57408;\"/>\n<strong>Import a file</strong><br/>\n<span class=\"small\">Recomendado si &gt;100 productos</span>\n</span>"
+msgstr "<span class=\"panel-title\">\n<span class=\"fa\" data-icon=\"&#57408;\"/>\n<strong>Importar un archivo</strong><br/>\n<span class=\"small\">Recomendado si &gt;100 productos</span>\n</span>"
 
 #. module: account
 #: model:ir.ui.view,arch_db:account.account_planner
@@ -612,7 +612,7 @@ msgstr "<strong>Conciliar sus extractos bancarios</strong>"
 msgid ""
 "<strong>Record Bank Statement (or import file)</strong><br/>\n"
 "                                        Depending on the volume of your transactions, you should be recording your bank statement every week to several times a day."
-msgstr "<strong>Anotar el extracto bancario (o importar archivo)</strong><br/>\nDependiendo del vol&uacute;men de transacciones, deber&iacute; guardar su extracto bancario cada semana o varias veces al d&iacute;a."
+msgstr "<strong>Anotar el extracto bancario (o importar archivo)</strong><br/>\nDependiendo del volumen de transacciones, debería guardar su extracto bancario cada semana o varias veces al día."
 
 #. module: account
 #: model:ir.ui.view,arch_db:account.account_planner
@@ -1266,7 +1266,7 @@ msgstr "Configuración avanzada"
 #: model:ir.ui.menu,name:account.menu_finance_entries
 #: model:res.groups,name:account.group_account_manager
 msgid "Adviser"
-msgstr "Asesor"
+msgstr "Contabilidad"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_tax_include_base_amount
@@ -1425,7 +1425,7 @@ msgstr "Permitir multi divisa"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_config_settings_group_proforma_invoices
 msgid "Allow pro-forma invoices"
-msgstr "Permitir facturas pro-forma"
+msgstr "Permitir facturas cotización"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_config_settings_group_multi_currency
@@ -1435,7 +1435,7 @@ msgstr "Permite un entorno multi compañía"
 #. module: account
 #: model:ir.model.fields,help:account.field_account_config_settings_group_proforma_invoices
 msgid "Allows you to put invoices in pro-forma state."
-msgstr "Permite poner las facturas es estado pro-forma."
+msgstr "Permite poner las facturas es estado cotización."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_config_settings_group_analytic_accounting
@@ -1459,6 +1459,7 @@ msgstr "Le permite usar la contabilidad analítica"
 #: model:ir.model.fields,field_description:account.field_account_tax_template_amount
 #: model:ir.model.fields,field_description:account.field_cash_box_in_amount
 #: model:ir.model.fields,field_description:account.field_cash_box_out_amount
+#: model:ir.ui.view,arch_db:account.report_invoice_document
 #: model:ir.ui.view,arch_db:account.view_move_line_form
 #, python-format
 msgid "Amount"
@@ -1650,9 +1651,8 @@ msgstr "Pedir reembolso"
 msgid ""
 "Asset management: This allows you to manage the assets owned by a company or a person. It keeps track of the depreciation occurred on those assets, and creates account move for those depreciation lines.\n"
 "\n"
-"Revenue recognition: This allows you to manage the Revenue recognition on selling product. It keeps track of the installment occurred on those revenue recognition, and creates account move for those installment lines.\n"
 "-This installs the module account_asset. If you do not check this box, you will be able to do invoicing & payments, but not accounting (Journal Items, Chart of Accounts, ...)"
-msgstr "Administración de activos: le permite administrar los activos pertenecientes a una compañía o persona. Realiza un seguimiento de la depreciación de dichos activos y crea movimientos contables de dicha depreciación.\n\nReconocimiento de ingresos: le permite administrar los ingresos al vender productos. Realiza un seguimiento de los plazos de dichos ingresos y crea los movimientos contables correspondientes.\n- Se instalará el módulo account_asset. Si no marca la casilla será capaz de hacer facturas y pagos, pero no contabilizarlos (Diarios, Planes contables, ...)"
+msgstr "Gestión de Activos: Esto le permite gestionar los activos de propiedad de la compañía o una persona. Se realiza un seguimiento de la depreciación se produjo en esos activos, y crea cuenta de movimiento para esas líneas de depreciación.\n\n-Este Instala el módulo de account_asset. Si no marca esta casilla, usted será capaz de hacer la facturación y los pagos, pero no tomar en cuenta (Diarios contables, Plan de Cuentas, ...)"
 
 #. module: account
 #: model:account.financial.report,name:account.account_financial_report_assets0
@@ -1661,8 +1661,8 @@ msgstr "Activos"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_config_settings_module_account_asset
-msgid "Assets management & Revenue recognition"
-msgstr "Administración de activos y reconocimiento de ingresos"
+msgid "Assets management"
+msgstr "Administración de Activos"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_chart_template_account_ids
@@ -3664,7 +3664,7 @@ msgid ""
 "Exchange rates can be automatically updated once a day from <strong>Yahoo "
 "Finance</strong> or the <strong>European Central Bank</strong>. You can "
 "activate this feature in the bottom of the"
-msgstr "Los tipos de cambio se pueden actualizar de forma automática una vez al día a partir de <strong>Finanzas Yahoo</ strong> o el <strong>Banco Central Europeo</strong>. Puede activar esta característica en la parte inferior de la"
+msgstr "Los tipos de cambio se pueden actualizar de forma automática una vez al día a partir de <strong>Finanzas Yahoo</strong> o el <strong>Banco Central Europeo</strong>. Puede activar esta característica en la parte inferior de la"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_res_company_expects_chart_of_accounts
@@ -5877,7 +5877,7 @@ msgstr "Una vez la información de su compañía sea la correcta, debería"
 #. module: account
 #: model:ir.ui.view,arch_db:account.account_planner
 msgid "One bank statement for each bank account you hold."
-msgstr "un extracto bancario por cada cuenta bancaria que posea."
+msgstr "un estado de cuenta por cada cuenta bancaria que posea."
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_wizard_multi_charts_accounts_only_one_chart_template
@@ -6064,7 +6064,7 @@ msgstr "Informes PDF"
 #: model:ir.ui.view,arch_db:account.invoice_form
 #: model:ir.ui.view,arch_db:account.report_invoice_document
 msgid "PRO-FORMA"
-msgstr "PRO-FORMA"
+msgstr "COTIZACIÓN"
 
 #. module: account
 #: selection:account.invoice,state:0
@@ -6608,12 +6608,12 @@ msgstr "Factura proforma"
 #: selection:account.invoice,state:0 selection:account.invoice.report,state:0
 #: model:ir.ui.view,arch_db:account.view_account_invoice_report_search
 msgid "Pro-forma"
-msgstr "Pro-forma"
+msgstr "cotización"
 
 #. module: account
 #: model:res.groups,name:account.group_proforma_invoices
 msgid "Pro-forma Invoices"
-msgstr "Facturas pro-forma"
+msgstr "Facturas cotización"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_analytic_line_product_id
@@ -7105,7 +7105,7 @@ msgstr "Valor residual en Divisas"
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_user_id
 #: model:ir.ui.view,arch_db:account.invoice_supplier_form
 msgid "Responsible"
-msgstr "Responsable"
+msgstr "Gerente"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_move_reversal_date
@@ -7309,7 +7309,7 @@ msgstr "La(s) factura(s) seleccionada(s) no puede(n) ser cancelada(s) porque ya 
 msgid ""
 "Selected invoice(s) cannot be confirmed as they are not in 'Draft' or 'Pro-"
 "Forma' state."
-msgstr "La(s) factura(s) seleccionada(s) no puede(n) confirmarse ya que no están en estado 'Borrador' o 'Pro-Forma'."
+msgstr "La(s) factura(s) seleccionada(s) no puede(n) confirmarse ya que no están en estado 'Borrador' o 'Cotización'."
 
 #. module: account
 #: selection:account.abstract.payment,payment_type:0
@@ -7589,6 +7589,7 @@ msgstr "Movimientos destino"
 #: model:ir.model.fields,field_description:account.field_account_invoice_tax_tax_id
 #: model:ir.model.fields,field_description:account.field_account_operation_template_second_tax_id
 #: model:ir.model.fields,field_description:account.field_account_operation_template_tax_id
+#: model:ir.ui.view,arch_db:account.report_invoice_document
 #: model:ir.ui.view,arch_db:account.view_account_tax_search
 #, python-format
 msgid "Tax"
@@ -8941,7 +8942,7 @@ msgstr "Pago a proveedor"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_res_partner_property_supplier_payment_term_id
 msgid "Vendor Payment Term"
-msgstr "Condiciones de pago a proveedor"
+msgstr "Plazo de pago a proveedor"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_invoice_reference
@@ -8995,7 +8996,7 @@ msgid ""
 "                                        for you: simply send your Odoo project\n"
 "                                        manager a CSV file containing all your\n"
 "                                        data."
-msgstr "Podemos realizar el proceso de importación por usted:\nsimplemente mande un archivo CSV a su project manager \nen Odoo con todos sus datos."
+msgstr "Podemos realizar el proceso de importación por usted:\nsimplemente mande un archivo CSV a su jefe de proyecto\nen Odoo con todos sus datos."
 
 #. module: account
 #: model:ir.ui.view,arch_db:account.account_planner
@@ -9004,7 +9005,7 @@ msgid ""
 "                                        for you: simply send your Odoo project\n"
 "                                        manager a CSV file containing all your\n"
 "                                        products."
-msgstr "Podemos realizar el proceso de importación por usted:\nsimplemente mande un archivo CSV a su project manager \nen Odoo con todos sus productos."
+msgstr "Podemos realizar el proceso de importación por usted:\nsimplemente envíe un archivo CSV a su Encargado de Proyecto \nen Odoo con todos sus productos."
 
 #. module: account
 #: model:ir.ui.view,arch_db:account.account_planner
@@ -9407,7 +9408,7 @@ msgstr "Su Balance de comprobación (lista de cuentas y sus saldos)."
 #. module: account
 #: model:ir.ui.view,arch_db:account.account_planner
 msgid "Your company's legal name, tax ID, address, and logo."
-msgstr "Su razón social, CIF, dirección y logo."
+msgstr "Su razón social, RUC, dirección y logotipo."
 
 #. module: account
 #: model:ir.ui.view,arch_db:account.account_planner
@@ -9640,7 +9641,7 @@ msgstr "la compañia matriz"
 #. module: account
 #: model:ir.ui.view,arch_db:account.account_planner
 msgid "the product list"
-msgstr ""
+msgstr "la lista de productos"
 
 #. module: account
 #: model:ir.ui.view,arch_db:account.account_planner
