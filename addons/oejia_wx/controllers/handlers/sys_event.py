@@ -15,7 +15,7 @@ def subscribe(message):
     env = request.env()
     rs = env['wx.user'].sudo().search( [('openid', '=', openid)] )
     if not rs.exists():
-        env['wx.user'].sudo().create(info)
+        env['wx.user'].sudo().create(dict({'member_id':env['res.partner'].sudo().create({'display_name':info['nickname'],'name':info['nickname']}).id},**info))
     
     return "您终于来了！欢迎关注"
 

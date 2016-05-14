@@ -463,7 +463,7 @@ def route(route=None, **kw):
         ``GET``, ``HEAD``, ``TRACE`` and ``OPTIONS``).
 
         CSRF protection is implemented by checking requests using
-        unsafe methods for a value called ``csrf_token`` as part of
+        unsafe methods for a value called ```` as part of
         the request's form data. That value is removed from the form
         as part of the validation and does not have to be taken in
         account by your own form processing.

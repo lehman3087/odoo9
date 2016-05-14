@@ -8,6 +8,7 @@ from requests.compat import json as _json
 from werobot.utils import to_text
 
 
+
 class ClientException(Exception):
     pass
 
@@ -28,6 +29,8 @@ class Client(object):
     通过这个类可以方便的通过微信 API 进行一系列操作，比如主动发送消息、创建自定义菜单等
     """
     def __init__(self, appid, appsecret):
+        #print(appid)
+        #print "fuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuck"
         self.appid = appid
         self.appsecret = appsecret
         self._token = None
@@ -72,12 +75,17 @@ class Client(object):
 
         :return: 返回的 JSON 数据包
         """
+
+        # print self.appid
+        #_logger.info('appid', self.appid)
         return self.get(
             url="https://api.weixin.qq.com/cgi-bin/token",
             params={
                 "grant_type": "client_credential",
-                "appid": self.appid,
-                "secret": self.appsecret
+                'appid':"wxd548cbdc841c83e9",
+                'secret':"47aa81e196e4f73c25d4a0816c8eb159"
+                # "appid": self.appid,
+                # "secret": self.appsecret
             }
         )
 
@@ -136,6 +144,7 @@ class Client(object):
 
         :return: 返回的 JSON 数据包
         """
+        # print "creat_menu"
         return self.post(
             url="https://api.weixin.qq.com/cgi-bin/menu/create",
             data=menu_data

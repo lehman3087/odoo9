@@ -593,6 +593,8 @@
                 </search>
             </field>
         </record>
+
+
         <record id="product_category_form_view" model="ir.ui.view">
             <field name="name">product.category.form</field>
             <field name="model">product.category</field>
@@ -627,11 +629,67 @@
             <field name="search_view_id" ref="product_category_search_view"/>
             <field name="view_id" ref="product_category_list_view"/>
         </record>
+
         <menuitem action="product_category_action_form"
             groups="base.group_no_one"
             id="menu_product_category_action_form"
             parent="prod_config_main" sequence="2"/>
 
+
+        <!-- product brand
+
+        <record id="product_brand_search_view" model="ir.ui.view">
+            <field name="name">product.brand.search</field>
+            <field name="model">product.brand</field>
+            <field name="arch" type="xml">
+                <search string="Product Brands">
+                    <field name="name" string="Product Brands"/>
+                    <field name="company_id"/>
+                </search>
+            </field>
+        </record>
+
+
+         <record id="product_brand_form_view" model="ir.ui.view">
+            <field name="name">product.brand.form</field>
+            <field name="model">product.brand</field>
+            <field name="arch" type="xml">
+                <form class="oe_form_configuration">
+                    <div class="oe_title">
+                        <label for="name" string="Brand name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="e.g. Lamps"/></h1>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="product_brand_list_view" model="ir.ui.view">
+            <field name="name">product.brand.list</field>
+            <field name="model">product.brand</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Product Brandes">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_brand_action_form" model="ir.actions.act_window">
+            <field name="name">Product Brandes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.brand</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="product_brand_search_view"/>
+            <field name="view_id" ref="product_brand_list_view"/>
+        </record>
+
+        <menuitem action="product_brand_action_form"
+            groups="base.group_no_one"
+            id="menu_product_brand_action_form"
+            parent="prod_config_main" sequence="2"/>
+
+        -->
         <!-- Unit of Measure -->
 
         <record id="product_uom_tree_view" model="ir.ui.view">

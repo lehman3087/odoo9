@@ -39,6 +39,7 @@ class wx_action_act_article(models.Model):
     article_ids = fields.Many2many('wx.articlesreply.article', 'articles_id', u'内容列表', )
         
     #_defaults = {
+
     #}
     
     def get_wx_reply(self):
@@ -60,7 +61,18 @@ class wx_action_act_custom(models.Model):
     #}
 
     def get_wx_reply(self):
+
         if self.excute_type=='python':
+            if self.name=='receivecode':
+
+                user=self.env['wx.user'].hasbinded()
+                if user==0:
+                    return "请先绑定手机，方便通知取件。<a href='http://lehman3087.oicp.net/wx/bind'>去绑定</a>"
+                package=self.env['logistics.package'].hasUnreceived(user.member_id.id)
+                if package!=0:
+                    return "您的取件码是"+package.verycode+"，请到"+package.enter_id.name+"。去取件"
+                else:
+                    return "暂无您的快件"
             return eval(self.excute_content)
 
 class wx_action_act_text(models.Model):

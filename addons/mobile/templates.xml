@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim:fdn=3:
+-->
+<openerp>
+    <data> 
+
+<!-- Frontend assets template -->
+<template id="mobile.assets_frontend" name="Mobile assets fronten">
+    <!-- jQuery stuff -->
+    <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/web/static/lib/jquery.blockUI/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="/web/static/lib/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="/web/static/lib/jquery.placeholder/jquery.placeholder.js"></script>
+    <script type="text/javascript" src="/web/static/lib/jquery.timeago/jquery.timeago.js"></script>
+    <script type="text/javascript" src="/web/static/lib/jquery.form/jquery.form.js"></script>
+	<script src="/mobile/static/lib/ratchet/js/ratchet.js"></script>
+    <script type="text/javascript" src="/web/static/lib/bootstrap/js/bootstrap.js"></script>
+	<link href="/mobile/static/lib/ratchet/css/ratchet.css" rel="stylesheet"/>
+</template>
+
+<!-- Layout and generic templates -->
+<template id="layout" name="Main layout">&lt;!DOCTYPE html&gt;
+    <html t-att-lang="lang and lang.replace('_', '-')"
+          t-att-data-translatable="'1' if translatable else None">
+	  <head>
+	    <meta charset="utf-8"/>
+	    <title><t t-esc="title"/></title>
+	    <!-- Sets initial viewport load and disables zooming  -->
+	    <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
+
+	    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+	    <meta name="apple-mobile-web-app-capable" content="yes"/>
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	    
+		<link rel="icon" href="/mobile/static/img/favicon.ico"/>
+		<link rel="apple-touch-icon-precomposed" href="/mobile/static/img/favicon.ico"/>
+		
+		<t t-call-assets="mobile.assets_frontend"/>
+	  </head>
+	  <body>
+	  	<t t-raw="0"/>
+	  </body>
+	</html>
+</template>
+
+<!-- Mobile Login -->
+<template id="login" name="Mobile Login Form">
+	<t t-call="mobile.layout">
+		<t t-set="title">Login</t>
+	    <!-- Top Bar -->
+	    <header class="bar bar-nav">
+	    	<h1 class="title" >Login</h1>
+	    </header>
+	    <!-- Content Zone -->
+	    <div class="content">
+			<form class="oe_login_form" t-attf-action="/mobile/login/{{ d_db }}" method="post">
+			<div class="input-row">
+				<label>Username:</label>
+				<input type="text" name="login" placeholder="your@email.com" t-att-value="login" id="login" required="required" autofocus="autofocus"/>
+			</div>
+			<div class="input-row">
+				<label>Password:</label>
+				<input type="password" name="password" id="password" required="required"/>
+			</div>
+				<input type="hidden" name="redirecturl-f" t-att-value="redirect_url"/>
+				<input type="hidden" name="db1" t-att-value="d_db"/>
+				<button type="submit" class="btn btn-primary btn-block">Log in</button>
+			</form>
+			<div t-if="error" class="content-padded">
+				<span t-esc="error"/>
+			</div>
+		</div>
+	</t>
+</template>
+
+<!-- Base Error Messagebox -->
+<template id="error" name="Base Error Messagebox">
+	<t t-call="mobile.layout">
+		<t t-set="title">Error</t>
+	    <!-- Top Bar -->
+	    <header class="bar bar-nav">
+	    	<a class="icon icon-left-nav pull-left" t-attf-href="#{ returnpath }" data-transition="slide-out"/>
+	    	<h1 class="title" >Error</h1>
+	    </header>
+	    <!-- Content Zone -->
+    	<div class="content">
+			<div class="content-padded">
+			  <h3><span t-esc="errortitle"/></h3>
+			  <p><span t-esc="errormessage"/></p>
+			</div>
+		</div>
+	</t>
+</template>
+    </data>
+</openerp>

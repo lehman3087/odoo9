@@ -1,34 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
 <openerp>
-  <data>
+    <data>
+
+
     <!-- explicit list view definition -->
-    <!--
+
+
     <record model="ir.ui.view" id="logistics.list">
       <field name="name">logistics list</field>
-      <field name="model">logistics.logistics</field>
+      <field name="model">logistics.package</field>
+      <field name="view_mode">tree</field>
+
       <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+        <tree decoration-warning="state=='draft'">
+          <field name="phone"/>
+            <field name="state"/>
+        <button name="sendm" states="draft" string="Submit to Manager" type="object" icon="fa-check"/>
+        <!--<button name="confirm" states="submit" string="Click here to approve" type="object" icon="fa-check" />-->
+        <!--<button name="cancel" states="done" string="Click here to cancel" type="object" icon="fa-times" />-->
+        <button name="%(logistics_confirm_check_wizard_action)d" states="submit" string="Click here to check" type="action" icon="fa-check"/>
+        <button name="cancel" states="done" string="Click here to cancel" type="object" icon="fa-times" />
         </tree>
+
       </field>
+
+
+
     </record>
-    -->
+
+
+
+    <record id="logistics_package_view_form" model="ir.ui.view">
+            <field name="name">logistics.package.form</field>
+            <field name="model">logistics.package</field>
+            <field name="arch" type="xml">
+                <form string='Package Form' class="l_package">
+                    <header>
+
+                        <field name='state' widget='statusbar' statusbar_visible='draft,submit'/>
+                    </header>
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name='enter_id'  class="oe_inline"/>
+                                <field name='date'/>
+                            </group>
+                            <group>
+                                <field name='receiver_id'/>
+                                <field name='phone'/>
+                            </group>
+
+                        </group>
+                         <separator string='Take some photo'/>
+
+                        <div  class="tp">click me</div>
+                                    <iframe width="100%" height="400px" src="/logistics/camera/"></iframe>
+
+
+                        <div class="webcam"></div>
+			            <div class="plist"> </div>
+			            <div class="pictures"><div class="nopic"></div></div>
+
+                       <field name='images1' invisible="1"/>
+                        <field name='images2' invisible="1"/>
+                        <field name='images3' invisible="1"/>
+                        <field name='images4' invisible="1"/>
+                        <field name='images5' invisible="1"/>
+                        <field name='images6' invisible="1"/>
+                        <field name='images7' invisible="1"/>
+                        <field name='images8' invisible="1"/>
+                        <field name='images9' invisible="1"/>
+                        <field name='images10' invisible="1"/>
+
+                        <separator string='Add some p_line'/>
+                        <field name='package_line_ids'>
+                            <tree string='List' editable='bottom'>
+                                <field name='company_id'/>
+                                <field name='serial' />
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
 
     <!-- actions opening views on models -->
-    <!--
+
     <record model="ir.actions.act_window" id="logistics.action_window">
       <field name="name">logistics window</field>
-      <field name="res_model">logistics.logistics</field>
+      <field name="res_model">logistics.package</field>
       <field name="view_mode">tree,form</field>
     </record>
-    -->
+
 
     <!-- server action to the one above -->
-    <!--
+
     <record model="ir.actions.server" id="logistics.action_server">
       <field name="name">logistics server</field>
-      <field name="model_id" ref="model_logistics_logistics"/>
+      <field name="model_id" ref="model_logistics_package"/>
       <field name="code">
         action = {
           "type": "ir.actions.act_window",
@@ -37,23 +109,42 @@
         }
       </field>
     </record>
-    -->
+
+        <record id="action_logistics_partner_postmans" model="ir.actions.act_window">
+            <field name="name">Postmans</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref=""/>
+            <field name="search_view_id" ref="view_logistics_partner_filter"/>
+            <field name="context">{'default_is_postman':True}</field>
+            <field name="domain">[('is_postman','=',True)]</field>
+        </record>
+
+
 
     <!-- Top menu item -->
-    <!--
+
     <menuitem name="logistics" id="logistics.menu_root"/>
-    -->
+
     <!-- menu categories -->
-    <!--
+
     <menuitem name="Menu 1" id="logistics.menu_1" parent="logistics.menu_root"/>
     <menuitem name="Menu 2" id="logistics.menu_2" parent="logistics.menu_root"/>
-    -->
+
     <!-- actions -->
-    <!--
+
     <menuitem name="List" id="logistics.menu_1_list" parent="logistics.menu_1"
               action="logistics.action_window"/>
-    <menuitem name="Server to list" id="logistics" parent="logistics.menu_2"
-              action="logistics.action_server"/>
-    -->
-  </data>
+
+        <menuitem
+            name="Postmans"
+            id="menu_postmans"
+            sequence="5"
+            action="action_logistics_partner_postmans"
+            parent="logistics.menu_2"
+            />
+
+
+    </data>
 </openerp>

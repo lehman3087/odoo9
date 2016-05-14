@@ -73,9 +73,12 @@
 			<field name="type">ir.actions.server</field>
 			<field name="model_id" ref="model_wx_menu"></field>
 			<field name="state">code</field>
+
+
 			
-			<field name="code">s=1
-time.sleep(5)</field>
+			<field name="code">
+                self.do_active(cr, uid, context['active_ids'],context=context)
+               </field>
 			
 			
 		</record>

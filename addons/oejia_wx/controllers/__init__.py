@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
-from . import routes
+import routes
 import handlers

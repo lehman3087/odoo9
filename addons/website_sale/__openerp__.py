@@ -1,4 +1,5 @@
 {
+
     'name': 'eCommerce',
     'category': 'Website',
     'sequence': 55,
@@ -6,10 +7,11 @@
     'website': 'https://www.odoo.com/page/e-commerce',
     'version': '1.0',
     'description': """
+
 OpenERP E-Commerce
 ==================
 
-        """,
+    """,
     'depends': ['website', 'sale', 'payment', 'website_payment', 'website_portal_sale', 'website_mail', 'rating'],
     'data': [
         'data/data.xml',

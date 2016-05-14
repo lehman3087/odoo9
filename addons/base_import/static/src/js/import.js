@@ -7,11 +7,15 @@ var ListView = require('web.ListView');
 var Model = require('web.DataModel');
 var session = require('web.session');
 var Widget = require('web.Widget');
+var framework = require('web.framework');
+var crash_manager = require('web.crash_manager');
+
 
 var QWeb = core.qweb;
 var _t = core._t;
 var _lt = core._lt;
 var StateMachine = window.StateMachine;
+var glocontext={};
 
 /**
  * Safari does not deal well at all with raw JSON data being
@@ -59,9 +63,12 @@ ListView.include({
         if (!this.$buttons) { // Ensures that this is only done once
             add_button = true;
         }
+        //
         this._super.apply(this, arguments); // Sets this.$buttons
         if(add_button) {
+           // alert('1');
             this.$buttons.on('click', '.o_list_button_import', function() {
+                glocontext=self.getParent().action.context || {};
                 self.do_action({
                     type: 'ir.actions.client',
                     tag: 'import',
@@ -413,9 +420,30 @@ var DataImport = Widget.extend(ControlPanelMixin, {
     },
     onimport: function () {
         var self = this;
+        var fields = this.$('.oe_import_fields input.oe_import_match_field').map(function (index, el) {
+                    var xi={};
+                    xi['name']=$(el).select2('val') || false;
+                    return xi;
+        }).get();
+        alert(fields);
         return this.call_import({ dryrun: false }).done(function (message) {
+            alert(message);
             if (!_.any(message, function (message) {
                     return message.type === 'error'; })) {
+                alert(message);
+                session.get_file({
+                url: '/web/export/xls',
+                data: {data: JSON.stringify({
+                    model: 'product.template',
+                    fields: fields,
+                    ids: message,
+                    domain: [],
+                    context: glocontext,
+                    import_compat: true
+                })},
+                complete: framework.unblockUI,
+                error: crash_manager.rpc_error.bind(crash_manager),
+                });
                 self['import_succeeded']();
                 return;
             }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+
+
+        <template name="oejia_wx.fronend" id="oejia_wx.fronend">
+&lt;!DOCTYPE html&gt;
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <title>蓝店</title>
+        <link rel="stylesheet" href="/oejia_wx/static/css/frozen.css"/>
+         <link rel="stylesheet" href="/oejia_wx/static/appcss/app.css"/>
+    </head>
+    <body ontouchstart="">
+        <header class="ui-header ui-header-positive ui-border-b">
+            <i class="ui-icon-return" onclick="history.back()"></i><h1>蓝店</h1><button class="ui-btn">回首页</button>
+        </header>
+        <footer class="ui-footer ui-footer-btn">
+            <ul class="ui-tiled ui-border-t">
+
+            </ul>
+        </footer>
+        <section class="ui-container">
+                <t t-raw="0"/>
+        </section>
+        <script src="/oejia_wx/static/lib/zepto.min.js"></script>
+        <script src="/oejia_wx/static/js/frozen.js"></script>
+        <script src="/oejia_wx/static/js/app.js"></script>
+        <script>
+        (function (){
+            var tab = new fz.Scroll('.ui-tab', {
+                role: 'tab',
+                autoplay: true,
+                interval: 3000
+            });
+            /* 滑动开始前 */
+            tab.on('beforeScrollStart', function(fromIndex, toIndex) {
+                console.log(fromIndex,toIndex);// from 为当前页，to 为下一页
+            })
+        })();
+        </script>
+    </body>
+</html>
+        </template>
+
+
+
+        <template name="oejia_wx.bind" id="oejia_wx.bind">
+
+            <t t-call="oejia_wx.fronend">
+                    <div class="demo-item">
+        <p class="demo-desc">手机绑定</p>
+        <div class="demo-block">
+            <div class="ui-form ui-border-t">
+                <form action="#">
+                    <div class="ui-form-item ui-form-item-pure ui-border-b">
+                        <input type="text" class="phone" maxLength="11" pattern="\d{11}" placeholder="手机号"/>
+                        <a href="#" class="ui-icon-close"></a>
+                    </div>
+                    <div class="ui-form-item ui-form-item-r ui-border-b">
+                        <input type="text" class="veryfy" placeholder="请输入验证码"/>
+                        <!-- 若按钮不可点击则添加 disabled 类 -->
+                        <button type="button" class="ui-border-l verify" t-attf-id="zphone">发送验证码</button>
+                        <a href="#" class="ui-icon-close"></a>
+                    </div>
+                </form>
+            </div>
+            </div>
+
+                        <div class="demo-block">
+            <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-primary submit">
+                    确定
+                </button>
+            </div>
+
+    </div>
+                </div>
+                </t>
+
+        </template>
+
+
+</odoo>

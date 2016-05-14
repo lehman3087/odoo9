@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+       <template id="layout" name="wx_layout">
+
+       </template>
+
+
+
+        <template id="wx_bind">
+
+
+
+        </template>
+
+    </data>
+</openerp>

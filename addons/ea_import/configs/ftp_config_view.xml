@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_ftp_config_form" model="ir.ui.view">
+            <field name="name">ftp_config.form</field>
+            <field name="model">import.ftp_config</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="FTP Configuration" col='6'>
+                    <group colspan="6" col="6">
+                        <field name="name"/>
+                        <field name="host"/>
+                        <field name="port"/>
+                    </group>
+                    <group colspan="6">
+                        <field name="username"/>
+                        <field name="passwd"/>
+                    </group>
+                    <button name="test_connection" type="object" string="Test Connection" icon='terp-camera_test' colspan="6"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_ftp_config_tree" model="ir.ui.view">
+            <field name="name">ftp_config.tree</field>
+            <field name="model">import.ftp_config</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="FTP Config">
+                    <field name="name"/>
+                    <field name="host"/>
+                    <field name="port"/>
+                    <field name="username"/>
+                    <field name="passwd"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_ftp_config">
+            <field name="name">FTP config</field>
+            <field name="res_model">import.ftp_config</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem name="FTP configuration" id="menu_ftp_configuration" parent="menu_configs" action="action_ftp_config" sequence="2"/>
+
+    </data>
+</openerp>

@@ -529,6 +529,7 @@ class product_template(osv.osv):
         'barcode': fields.related('product_variant_ids', 'barcode', type='char', string='Barcode', oldname='ean13'),
         'default_code': fields.related('product_variant_ids', 'default_code', type='char', string='Internal Reference'),
         'item_ids': fields.one2many('product.pricelist.item', 'product_tmpl_id', 'Pricelist Items'),
+        # 'import_patch': fields.char('批次', required=True, translate=True, select=True,copy=False, readonly=True),
     }
 
     # image: all image fields are base64 encoded and PIL-supported
@@ -688,9 +689,13 @@ class product_template(osv.osv):
         if not context or "create_product_product" not in context:
             self.create_variant_ids(cr, uid, [product_template_id], context=context)
 
+
+
+
         # TODO: this is needed to set given values to first variant after creation
         # these fields should be moved to product as lead to confusion
         related_vals = {}
+        # related_vals['import_patch'] = self.env['ir.sequence'].next_by_code('product.template') or 'New'
         if vals.get('barcode'):
             related_vals['barcode'] = vals['barcode']
         if vals.get('default_code'):
@@ -988,6 +993,20 @@ class product_product(osv.osv):
                                           groups="base.group_user", string="Cost"),
         'volume': fields.float('Volume', help="The volume in m3."),
         'weight': fields.float('Gross Weight', digits_compute=dp.get_precision('Stock Weight'), help="The weight of the contents in Kg, not including any packaging, etc."),
+        # 'percentage':fields.char('成色'),
+        # 'remarks':fields.text("备注"),
+        # 'item_number':fields.char("货号"),
+        # 'process_cost':fields.char("加工费"),
+        # 'hand':fields.char("手寸"),
+        # 'store_weight':fields.char("石重"),
+        # 'side_store_weight':fields.char("副石"),
+        # 'brand':fields.many2one('brand',string="品牌",ondelete="cascade"),
+        # 'tiaoma':fields.char('条码'),
+        # 'purity':fields.char('含量'),
+        # 'franchise':fields.char('加盟店'),
+        # 'inlay':fields.char('彩石'),
+
+
     }
 
     _defaults = {
@@ -1233,6 +1252,15 @@ class product_product(osv.osv):
         # When sale/product is installed alone, there is no need to create procurements. Only
         # sale_stock and sale_service need procurements
         return False
+
+# class brand(osv.osv):
+#     _name = "brand"
+#
+#     _columns={
+#        'name':fields.char('品牌名', required=True),
+#        'company':fields.many2one("res.partner",'Vendor'),
+#        'products_ids':fields.one2many("product.product","brand")
+#     }
 
 class product_packaging(osv.osv):
     _name = "product.packaging"

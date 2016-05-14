@@ -26,6 +26,7 @@
              'views/wx_menu_views.xml',
              'views/wx_user_group_views.xml',
              'views/wx_user_views.xml',
+             'views/wx_ui_views.xml',
              ],
     'depends' : ['im_livechat'],
     'installable': True,

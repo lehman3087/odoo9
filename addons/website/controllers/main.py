@@ -16,6 +16,10 @@ from openerp.addons.base.ir.ir_qweb import AssetsBundle
 from openerp.addons.web.controllers.main import WebClient, Binary
 from openerp.addons.web import http
 from openerp.http import request
+import requests
+import urllib
+import urllib2
+from openerp.tools import random_str
 
 logger = logging.getLogger(__name__)
 
@@ -373,7 +377,32 @@ class Website(openerp.addons.web.controllers.main.Home):
             return res
         return request.redirect('/')
 
+    @http.route('/website/sms/verifycode', type='http', auth="public", website=True)
+    def send_messag(self, **kw):
+        mobile=request.params.get('mobile') or 18934488948
+        verify=random_str.random_num(5)
+        request.session[mobile]=verify
+        url="http://106.ihuyi.cn/webservice/sms.php?method=Submit"
+        rowdata={
+            "account": "cf_lehman",
+            "password": "1513141981",
+            "mobile": mobile,
+            "content":"您的验证码是："+verify+"。请不要把验证码泄露给其他人。",
+        }
+        data=urllib.urlencode(rowdata)
+        req=urllib2.Request(url,data)
+        resp = urllib2.urlopen(req)
+        return resp.read()
 
+    @http.route('/website/sms/test_session', type='http', auth="public", website=True)
+    def test_session(self,**kw):
+        request.session['usid']='222'
+        return request.session['usid']
+
+
+    @http.route('/website/sms/test_session1', type='http', auth="public", website=True)
+    def test_session1(self,**kw):
+        return request.session['usid']
 #------------------------------------------------------
 # Retrocompatibility routes
 #------------------------------------------------------

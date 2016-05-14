@@ -3,13 +3,16 @@
 from openerp import models, fields, api
 from ..controllers import client
 from openerp.http import request
+from ..controllers import utils
 
 
 class wx_user(models.Model):
     _name = 'wx.user'
     _description = u'微信用户'
     #_order = 
-    #_inherit = []
+    _inherits = {
+         'res.partner':"member_id",
+    }
 
     city = fields.Char(u'城市', )
     country = fields.Char(u'国家', )
@@ -21,12 +24,17 @@ class wx_user(models.Model):
     sex = fields.Selection([(1,u'男'),(2,u'女')], string=u'性别', )
     subscribe = fields.Boolean(u'关注状态', )
     subscribe_time = fields.Char(u'关注时间', )
-    
+    member_id=fields.Many2one(
+        'res.partner',
+        string='Member',
+        required=True,
+        ondelete='cascade')
+
     headimg= fields.Html(compute='_get_headimg', string=u'头像')
 
     #_defaults = {
     #}
-    
+
     @api.model
     def sync(self):
         next_openid = 'init'
@@ -61,10 +69,47 @@ class wx_user(models.Model):
                         if g_flag and info['group_id'] not in group_list:
                             self.env['wx.user.group'].sync()
                             g_flag = False
-                        self.create(info)
-                
+                        # print info
+                        self.create({
+                            'member_id':self.env['res.partner'](dict({'member_id':self.env['res.partner'].create({'display_name':info['nickname'],'name':info['nickname']}).id},**info))
+                        })
+                        # self.create(info)
+
         print 'total:',c_total
-        
+
+    @api.multi
+    def updateWxMember(self,phone):
+        openid=utils.get_openid()
+        print openid+'|'+phone
+        rs = self.sudo().search([('openid', '=', openid)])
+        if len(rs)>0:
+            print phone
+            rs.sudo().write({'name':phone,'mobile':phone})
+
+    # @api.multi
+    # def updateWxMember1(self):
+    #     #openid=request.session['openid']
+    #     rs = self.sudo().search( [('openid', '=', 'oplFas86MrbetIA2vBzIV08Ryqhk')] )
+    #     print len(rs)
+    #     if len(rs)>0:
+    #         rs.sudo().write({'mobile':'123'})
+
+    @api.multi
+    def hasbinded(self):
+        openid=request.session['openid']
+        print openid
+        rs = self.search( [('openid', '=', openid)])
+        print rs.member_id.name
+        if rs.member_id.mobile==False:
+            return 0
+        else:
+            return rs
+
+
+    @api.one
+    def createWxMember(self,info):
+        self.create({'member_id':self.env['res.partner'].create({'name':'1111'}).id}.join(info))
+
     @api.one
     def _get_headimg(self):
         self.headimg= '<img src=%s width="100px" height="100px" />'%self.headimgurl

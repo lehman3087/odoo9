@@ -1,22 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <!-- <template id="listing"> -->
-        <!--   <ul> -->
-        <!--     <li t-foreach="objects" t-as="object"> -->
-        <!--       <a t-attf-href="#{ root }/objects/#{ object.id }"> -->
-        <!--         <t t-esc="object.display_name"/> -->
-        <!--       </a> -->
-        <!--     </li> -->
-        <!--   </ul> -->
-        <!-- </template> -->
-        <!-- <template id="object"> -->
-        <!--   <h1><t t-esc="object.display_name"/></h1> -->
-        <!--   <dl> -->
-        <!--     <t t-foreach="object._fields" t-as="field"> -->
-        <!--       <dt><t t-esc="field"/></dt> -->
-        <!--       <dd><t t-esc="object[field]"/></dd> -->
-        <!--     </t> -->
-        <!--   </dl> -->
-        <!-- </template> -->
+
+
+
+      <template id="logistics.camera_asset" name="camera">&lt;!DOCTYPE html&gt;
+            <html style="height: 100%">
+                <head>
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+                    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+                    <title>Odoo</title>
+                    <link rel="shortcut icon" href="/web/static/src/img/favicon.ico" type="image/x-icon"/>
+                    <link rel="stylesheet" href="/web/static/src/css/full.css" />
+
+                    <link rel="stylesheet" href="/logistics/static/src/css/jquery.qtip.css" type="text/css" media="screen"/>
+            <script type="text/javascript" src="/logistics/static/src/js/jquery-1.8.2.min.js"></script>
+		    <script type="text/javascript" src="/logistics/static/src/js/photobooth_min.js"></script>
+            <script type="text/javascript" src="/logistics/static/src/js/jquery.qtip.min.js"></script>
+             <script type="text/javascript" src="/logistics/static/src/js/gbin1.js"></script>
+                    		<style>
+			body{
+				font-size:12px;
+				background: #333;
+				font-family: 'Revalia', cursive, arial;
+			}
+
+			div#pictures,div#webcam{
+				margin: 10px 0 0;
+			}
+                                #pictures{
+                                float: left;
+    width: 50%;
+                                }
+
+			h1{
+				margin: 20px 0;
+			}
+
+			div#from{
+				margin:20px 0px;
+			}
+
+			div#from a{
+				color: #FFF;
+				font-size:12px;
+				background: #1557C3;
+				margin: 20px 0;
+				border-radius: 5px;
+				padding:10px;
+				line-height: 25px;
+			}
+
+			h1 a{
+				background: #333;
+				border-radius: 5px;
+				padding: 5px;
+				float:right;
+				cusor: hand;
+				color: #FFF;
+				text-decoration: none;
+				margin-left: 20px;
+			}
+
+			#main{
+				width: 800px;
+
+				background: #FFF;
+				color: #333;
+				border: 2px solid #FFF;
+				box-shadow: 0px 0px 10px #CCC;
+			}
+
+			#main article{
+
+				background: #F8F8F8;
+
+				padding:20px;
+				border: 1px solid #bbb;
+			}
+
+			#main #webcam{
+				height: 300px;
+				width: 48%;
+                                float:left;
+			}
+
+			#main #plist{
+				margin: 20px 0;
+				font-weight: bold;
+				border-radius: 5px;
+				background: #CCC;
+				padding:10px;
+			}
+
+			#main img{
+                float:left;
+                                width:100px;
+                                heith:100px
+				margin-bottom: 50px;
+				background: #F8F8F8;
+				border-radius: 10px;
+				box-shadow: 0px 0px 5px #888;
+			}
+
+			.clear{
+				clear:both;
+			}
+
+			#main ul{
+				list-style:none;
+				margin:0;
+				padding:0;
+			}
+
+			#main .photobooth{
+				border: 1px solid #ccc;
+				border-radius: 5px;
+			}
+
+		</style>
+
+
+                </head>
+                <body>
+                    <section id="main">
+
+			    <article>
+
+			<div id="webcam"></div>
+
+			<div id="pictures"><div class="nopic">no pictures</div></div>
+
+			<div class="clear"></div>
+			</article>
+		</section>
+
+                </body>
+            </html>
+        </template>
+
+
+
     </data>
 </openerp>

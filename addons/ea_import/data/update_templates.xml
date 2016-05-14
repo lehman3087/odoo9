@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!--Relink templates from old table 'ea_import_chain_link' directly to ea_import_chain-->
+        <function model="ea_import.template" name="update_templates"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,146 @@
+<openerp>
+  <data>
+
+       <menuitem id='menu_jewelry' name='jewelry'  groups="group_jewelry_user" icon="fa-cutlery" web_icon="jewelry,static/description/icon.png"/>
+
+       <menuitem name="Configuration" parent="menu_jewelry" id="menu_jewelry_config"  groups="group_jewelry_manager,base.group_configuration"/>
+
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="jewelry.list">
+      <field name="name">jewelry list</field>
+      <field name="model">jewelry.jewelry</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="jewelry.action_window">
+      <field name="name">jewelry window</field>
+      <field name="res_model">jewelry.jewelry</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="jewelry.action_server">
+      <field name="name">jewelry server</field>
+      <field name="model_id" ref="model_jewelry_jewelry"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="jewelry" id="jewelry.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="jewelry.menu_1" parent="jewelry.menu_root"/>
+    <menuitem name="Menu 2" id="jewelry.menu_2" parent="jewelry.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="jewelry.menu_1_list" parent="jewelry.menu_1"
+              action="jewelry.action_window"/>
+    <menuitem name="Server to list" id="jewelry" parent="jewelry.menu_2"
+              action="jewelry.action_server"/>
+    -->
+
+<!--Action for Products-->
+        <record id="jewelry_product_action" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="res_model">jewelry.product</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to create a product for lunch.
+            </p>
+              <p>
+                A product is defined by its name, category, price and vendor.
+              </p>
+            </field>
+        </record>
+
+
+        <menuitem name="Products" parent="menu_jewelry" id="jewelry_product_menu" action="jewelry_product_action"/>
+
+
+
+
+
+       <record id="jewelry_product_brand_action" model="ir.actions.act_window">
+            <field name="name">Product Attribute</field>
+            <field name="res_model">brand</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to create a lunch category.
+            </p>
+              <p>
+                Here you can access all categories for the lunch products.
+              </p>
+            </field>
+        </record>
+
+
+
+       <menuitem name="Product Brands" parent="menu_jewelry_config" id="lunch_product_brand_menu" action="jewelry_product_brand_action" />
+
+
+      <record id="jewelry_product_brand_view_form" model="ir.ui.view">
+            <field name="name">Product brand Form</field>
+            <field name="model">brand</field>
+            <field name="arch" type="xml">
+                <form string="brand Form">
+                    <group>
+                        <field name='name' string="Product brand: "/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+
+      <!--View for Products-->
+        <record id="jewelry_product_view_tree" model="ir.ui.view">
+            <field name="name">jewelry.product.tree</field>
+            <field name="model">jewelry.product</field>
+            <field name="arch" type="xml">
+                <tree string="Products Tree">
+                    <field name="name"/>
+                    <field name="price"/>
+                </tree>
+            </field>
+        </record>
+
+
+      <!-- base structure of product.template, common with product.product -->
+        <record id="jewelry_product_form_view" model="ir.ui.view">
+            <field name="name">jewelry.product.form</field>
+            <field name="model">jewelry.product</field>
+             <field name="inherit_id" ref="website_sale.product_template_form_view"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+
+            </field>
+        </record>
+
+
+
+  </data>
+</openerp>

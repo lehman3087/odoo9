@@ -25,6 +25,16 @@
                     <field name="accessory_product_ids" widget="many2many_tags"/>
                     <field name="website_style_ids" widget="many2many_tags" groups="base.group_no_one"/>
                 </group>
+                <group name="jewelry_special" string="Special" >
+                    <field name="percentage"  string="成色"/>
+                    <field name="remarks" string="备注"/>
+                    <field name="huohao" string="货号"/>
+                    <field name="process_cost" string="加工费"/>
+                    <field name="hand" string="手寸"/>
+                    <field name="store_weight" string="石重"/>
+                    <field name="side_store_weight" string="副石"/>
+                    <field name="brand_id" string="品牌" widget="many2one_tags" />
+                </group>
             </group>
             <div name="button_box" position="inside">
                 <button class="oe_stat_button" name="website_publish_button"
@@ -115,6 +125,61 @@
         </field>
     </record>
     <menuitem action="product_public_category_action" id="menu_product_public_category" parent="product.prod_config_main" sequence="2" />
+
+    <!-- Product Public Brand -->
+
+        <record id="product_public_brand_form_view" model="ir.ui.view">
+        <field name="name">brand.form</field>
+        <field name="model">brand</field>
+        <field name="arch" type="xml">
+            <form string="Website Public Brands">
+                <sheet>
+                    <field name="image_medium" widget='image' class="oe_avatar oe_right"/>
+                    <div class="oe_left">
+                        <group>
+                            <field name="name"/>
+                            <field name="company"/>
+                        </group>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="product_public_brand_tree_view" model="ir.ui.view">
+        <field name="name">brand.tree</field>
+        <field name="model">brand</field>
+        <field name="field_parent" eval="False"/>
+        <field name="arch" type="xml">
+            <tree string="Product Product Brands">
+                <field name="name" invisible="1"/>
+                <field name="company"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="product_public_brand_action" model="ir.actions.act_window">
+        <field name="name">Website Product Brand</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">brand</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to define a new category.
+          </p><p>
+            Categories are used to browse your products through the
+            touchscreen interface.
+          </p>
+        </field>
+    </record>
+
+    <menuitem action="product_public_brand_action" id="menu_product_public_brand" parent="product.prod_config_main" sequence="10" />
+
+
+
+
 
     <record id="website_sale_pricelists_by_website" model="ir.actions.act_window">
         <field name="name">Website Pricelist</field>

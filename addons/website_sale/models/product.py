@@ -85,6 +85,43 @@ class product_public_category(osv.osv):
         for rec in self:
             rec.image = tools.image_resize_image_big(rec.image_small)
 
+
+class brand(osv.Model):
+    _name = "brand"
+
+    _columns = {
+        'name': fields.char("品牌名"),
+        "company":fields.many2one("res.partner",'Vendor'),
+        'product_ids':fields.one2many("product.template","brand_id")
+    }
+
+    image = openerp.fields.Binary("Image", attachment=True,
+        help="This field holds the image used as image for the brand, limited to 1024x1024px.")
+    image_medium = openerp.fields.Binary("Medium-sized image",
+        compute='_compute_images', inverse='_inverse_image_medium', store=True, attachment=True,
+        help="Medium-sized image of the category. It is automatically "\
+             "resized as a 128x128px image, with aspect ratio preserved. "\
+             "Use this field in form views or some kanban views.")
+    image_small = openerp.fields.Binary("Small-sized image",
+        compute='_compute_images', inverse='_inverse_image_small', store=True, attachment=True,
+        help="Small-sized image of the category. It is automatically "\
+             "resized as a 64x64px image, with aspect ratio preserved. "\
+             "Use this field anywhere a small image is required.")
+
+    @openerp.api.depends('image')
+    def _compute_images(self):
+        for rec in self:
+            rec.image_medium = tools.image_resize_image_medium(rec.image)
+            rec.image_small = tools.image_resize_image_small(rec.image)
+
+    def _inverse_image_medium(self):
+        for rec in self:
+            rec.image = tools.image_resize_image_big(rec.image_medium)
+
+    def _inverse_image_small(self):
+        for rec in self:
+            rec.image = tools.image_resize_image_big(rec.image_small)
+
 class product_template(osv.Model):
     _inherit = ["product.template", "website.seo.metadata", 'website.published.mixin', 'rating.mixin']
     _order = 'website_published desc, website_sequence desc, name'
@@ -114,6 +151,22 @@ class product_template(osv.Model):
         'website_style_ids': fields.many2many('product.style', string='Styles'),
         'website_sequence': fields.integer('Sequence', help="Determine the display order in the Website E-commerce"),
         'public_categ_ids': fields.many2many('product.public.category', string='Website Product Category', help="Those categories are used to group similar products for e-commerce."),
+
+    'percentage':fields.char('成色1'),
+    'inlay':fields.char('彩石'),
+    'remarks' :fields.text("备注"),
+    'product_name' :fields.text("品名"),
+    'huohao':fields.char("货号"),
+    'process_cost':fields.char("加工费"),
+    'hand':fields.char("手寸"),
+    'store_weight':fields.char("石重"),
+    'side_store_weight':fields.char("副石"),
+    'brand_id':fields.many2one('brand',string="品牌"),
+    'store':fields.char("专卖店"),
+    'test_code':fields.char("检测号"),
+    'brand_name': fields.related('brand_id', 'name', type='char', string='品牌名称'),
+    # 'import_patch': fields.char('批次', required=True, translate=True, select=True,copy=False, readonly=True),
+
     }
 
     def _defaults_website_sequence(self, cr, uid, *l, **kwargs):
@@ -158,6 +211,10 @@ class product_template(osv.Model):
             return self.write(cr, uid, [ids[0]], {'website_sequence': next[1]}, context=context)
         else:
             return self.set_sequence_bottom(cr, uid, ids, context=context)
+
+
+
+
 
 
 class product_product(osv.Model):

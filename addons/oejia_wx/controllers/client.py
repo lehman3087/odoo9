@@ -2,7 +2,7 @@
 
 from werobot.client import Client
 
-wxclient = Client('appid_xxxxxxxxxxxxxxx', 'appsecret_xxxxxxxxxxxxxx')
+wxclient = Client('wxd548cbdc841c83e9', '47aa81e196e4f73c25d4a0816c8eb159')
 
 UUID_OPENID = {}
 

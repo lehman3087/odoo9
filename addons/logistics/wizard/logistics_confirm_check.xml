@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="logistics_confirm_check_wizard_view_form" model="ir.ui.view">
+        <field name="name">logistics.confirm.check.wizard.form</field>
+        <field name="model">logistics.confirm.check.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Logistic code check">
+                <separator string="code of receive."/>
+                <field name="code"/>
+                <footer>
+                    <button string='apply' name="package_check" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <record id="logistics_confirm_check_wizard_action" model="ir.actions.act_window">
+        <field name="name">Check code</field>
+        <field name="res_model">logistics.confirm.check.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="logistics_confirm_check_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

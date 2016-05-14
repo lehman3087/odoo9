@@ -448,11 +448,13 @@ class ir_import(orm.TransientModel):
                 'message': unicode(e),
                 'record': False,
             }]
-
+        _logger.info(data)
+        _logger.info(import_fields)
         _logger.info('importing %d rows...', len(data))
         import_result = self.pool[record.res_model].load(
             cr, uid, import_fields, data, context=context)
         _logger.info('done')
+        _logger.info(import_result)
 
         # If transaction aborted, RELEASE SAVEPOINT is going to raise
         # an InternalError (ROLLBACK should work, maybe). Ignore that.
@@ -469,4 +471,6 @@ class ir_import(orm.TransientModel):
         except psycopg2.InternalError:
             pass
 
-        return import_result['messages']
+        return import_result['ids']
+
+
