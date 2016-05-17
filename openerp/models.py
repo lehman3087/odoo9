@@ -934,6 +934,7 @@ class BaseModel(object):
 
             This method is used when exporting data via client menu
         """
+
         fields_to_export = map(fix_import_export_id_paths, fields_to_export)
         if raw_data:
             self = self.with_context(export_raw_data=True)

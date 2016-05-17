@@ -11,7 +11,7 @@
                     <button string="Show Result" type="object" name="show_result" icon="gtk-jump-to"/>
                     <field name="name"/>
                     <field name="chain_id" invisible="1"/>
-                    <field name="result_ids_file"/>
+                    <field name="result_ids_csv"/>
                     <field name="import_time"/>
                 </tree>
             </field>
@@ -25,7 +25,7 @@
                 <form string="Import Result" col="2">
                     <field name="name"/>
                     <field name="chain_id" invisible="1"/>
-                    <field name="result_ids_file"/>
+                    <field name="result_ids_csv"/>
                     <button string="Show Result" type="object" name="show_result" icon="gtk-jump-to" colspan="8"/>
                     <field name="import_time"/>
                 </form>

@@ -127,6 +127,7 @@
             <field name="res_model">lunch.order</field>
             <field name="view_mode">form</field>
         </record>
+
         <menuitem name="New Order" parent="menu_lunch_title" id="lunch_order_menu_form" action="lunch_order_action_form" sequence="1"/>
 
         <record id="lunch_order_action_tree" model="ir.actions.act_window">

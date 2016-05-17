@@ -31,7 +31,10 @@
     'init_xml': [],
     'demo_xml': [
     ],
-
+    'qweb': ['static/src/xml/import.xml'],
+    'data': [
+        'views/ea_import.xml',
+    ],
     'update_xml':  [
                     'security/security_groups.xml',
                     'security/ir.model.access.csv',
@@ -53,6 +56,7 @@
                     ],
     'active': False,
     'application': True,
+
     'installable': True,
     'images': ['images/chain_form.png', 'images/template_form.png'],
     'external_dependencies': {

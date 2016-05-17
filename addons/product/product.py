@@ -473,6 +473,7 @@ class product_template(osv.osv):
 
     _columns = {
         'name': fields.char('Name', required=True, translate=True, select=True),
+
         'sequence': fields.integer('Sequence', help='Gives the sequence order when displaying a product list'),
         'product_manager': fields.many2one('res.users','Product Manager'),
         'description': fields.text('Description',translate=True,

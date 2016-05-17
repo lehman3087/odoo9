@@ -30,10 +30,10 @@ class ea_import_chain_result(osv.osv):
         'chain_id': fields.many2one('ea_import.chain',),  # to be removed
         'log_id': fields.many2one('ea_import.log',),
         'result_ids_file': fields.binary('Result Ids',),
+        'result_ids_csv': fields.binary('Result csv',),
         'import_time': fields.datetime('Import Time',),
         'scheduler_log_id': fields.many2one('ea_import.scheduler.log', 'Scheduler Log'),
         }
-
     _defaults = {
     }
 

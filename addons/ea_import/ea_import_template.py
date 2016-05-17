@@ -113,6 +113,9 @@ class ea_import_template(osv.osv):
         'sequence': 1,
     }
 
+
+
+
     def generate_record(self, cr, uid, ids, record_list, row_number, context={}):
         result = []
         if len(record_list):
@@ -212,6 +215,8 @@ class ea_import_template(osv.osv):
                     context['import_log'].append(log_notes)
                     result.append(new_rec_id)
         return result
+
+
 
     def get_related_id(self, cr, uid, ids, input_list, row_number, context={}):
         result = []

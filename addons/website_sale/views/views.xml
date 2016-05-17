@@ -57,6 +57,36 @@
             </field>
         </field>
     </record>
+
+
+
+     <record id="website_product_tree_view" model="ir.ui.view">
+        <field name="name">website.product.template.tree</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                   <field name="name"/>
+                     <field name="product_name"/>
+                    <field name="huohao"/>
+                    <field name="process_cost"/>
+                    <field name="hand"/>
+                    <field name="store_weight"/>
+                    <field name="side_store_weight"/>
+                    <field name="brand_id"/>
+                    <field name="list_price"/>
+                    <field name="percentage"/>
+                    <field name="weight"/>
+                    <field name="store"/>
+                    <field name="test_code"/>
+                    <field name="barcode"/>
+                    <field name="state"/>
+                    <field name="uom_id" invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+
     <record id="variants_tree_view" model="ir.ui.view">
         <field name="name">variants.template.tree</field>
         <field name="model">product.attribute.value</field>
@@ -67,6 +97,9 @@
             </field>
         </field>
     </record>
+
+
+
     <record id="attribute_tree_view" model="ir.ui.view">
         <field name="name">product.attribute.tree.type</field>
         <field name="model">product.attribute</field>

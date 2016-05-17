@@ -22,12 +22,15 @@ from  openerp.osv import osv,fields
 import base64
 import datetime
 import os
+from cStringIO import StringIO
+from openerp.http import request
 
 LOG_STATE = [
     ('success', 'Success'),
     ('failed', 'Failed'),
 ]
 
+file='';
 
 class ea_import_scheduler(osv.osv):
     _name = 'ea_import.scheduler'
@@ -37,6 +40,73 @@ class ea_import_scheduler(osv.osv):
         'log_ids': fields.one2many('ea_import.scheduler.log', 'scheduler_id', 'Logs'),
         'import_chain_id': fields.many2one('ea_import.chain', 'Import chain'),
         }
+
+    def upload(self, cr, uid, ids,context=None,):
+        return True
+    #     context = {}
+    #     log_notes = "*** Init Logging ***\n"
+    #     log_notes += "********************\n"
+    #     import_chain_obj = self.pool.get('ea_import.chain')
+    #     log_obj = self.pool.get('ea_import.scheduler.log')
+    #     result_obj = self.pool.get('ea_import.chain.result')
+    #
+    #     for scheduler in self.browse(cr, uid, ids, context=context):
+    #
+    #         #files_to_import = os.listdir(scheduler.input_directory)
+    #
+    #         # loop on file_name list
+    #         #for file_name in files_to_import:
+    #
+    #         # create log record entry
+    #         log_record = log_obj.create(cr, uid, {
+    #             'scheduler_id': scheduler.id,
+    #             'name': file.filename,
+    #             'date_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+    #         }, )
+    #
+    #         # open the file_name
+    #         try:
+    #             f = open(file_name, 'r')
+    #             log_notes += "Opening file_name - " + file_name + "\n"
+    #         except IOError as e:
+    #             log_notes += "IO Error - " + e + " stopping import - FAILED!\n"
+    #             log_obj.write(cr, uid, [log_record], {'log_notes': log_notes, 'state': 'failed'})
+    #             break
+    #
+    #         # load data from CSV file_name
+    #         csv_data = f.read()
+    #
+    #         # convert data into base64
+    #         new_file_data = base64.encodestring(csv_data)
+    #
+    #         # get the import chain id from the form
+    #         chain_id = scheduler.import_chain_id.id
+    #
+    #         # write converted data to the import chain input_file field
+    #         import_chain_obj.write(cr, uid, [chain_id], {'input_file': new_file_data}, context=context)
+    #
+    #         # run the import function
+    #         # print('######################################3')
+    #         # print(chain_id)
+    #         try:
+    #             import_chain_obj.import_to_db(cr, uid, [chain_id], context=context)
+    #             #print('######################################4')
+    #             log_notes += "Import completed successfully!\n"
+    #         except:
+    #             log_notes += "Error with import_to_db function - stopping import - FAILED!\n"
+    #             log_notes += "Run this manually from Import Chains.  There is a problem with the contents of the CSV.\n"
+    #             log_obj.write(cr, uid, [log_record], {'log_notes': log_notes, 'state': 'failed'}, context=context)
+    #             break
+    #
+    #         # write import results to log entry
+    #         result_obj.write(cr, uid, context['result_ids'], {'scheduler_log_id': log_record, })
+    #
+    #         # close file_name
+    #         f.close()
+    #
+    #         # write final log notes
+    #         log_obj.write(cr, uid, [log_record], {'log_notes': log_notes, 'state': 'success'})
+    #     return True
 
     def run_import(self, cr, uid, ids, context=None):
         context = {}

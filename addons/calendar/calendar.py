@@ -1621,6 +1621,7 @@ class calendar_event(osv.Model):
 
     def export_data(self, cr, uid, ids, *args, **kwargs):
         """ Override to convert virtual ids to ids """
+
         real_ids = []
         for real_id in get_real_ids(ids):
             if real_id not in real_ids:

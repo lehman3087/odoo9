@@ -1328,6 +1328,10 @@ class ExportFormat(object):
             fields = [field for field in fields if field['name'] != 'id']
 
         field_names = map(operator.itemgetter('name'), fields)
+        print(ids)
+        print(field_names)
+        print(self.raw_data)
+        print(Model)
         import_data = Model.export_data(ids, field_names, self.raw_data, context=context).get('datas',[])
 
         if import_compat:

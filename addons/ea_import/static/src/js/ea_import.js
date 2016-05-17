@@ -1,4 +1,4 @@
-odoo.define('base_import.import', function (require) {
+odoo.define('ea_import.import', function (require) {
 "use strict";
 
 var ControlPanelMixin = require('web.ControlPanelMixin');
@@ -48,30 +48,10 @@ function jsonp(form, attributes, callback) {
     });
     $(form).ajaxSubmit(attributes);
 }
-
-// if true, the 'Import', 'Export', etc... buttons will be shown
-ListView.prototype.defaults.import_enabled = true;
-ListView.include({
-    /**
-     * Extend the render_buttons function of ListView by adding an event listener
-     * on the import button.
-     * @return {jQuery} the rendered buttons
-     */
-    render_buttons: function() {
-        var self = this;
-        var add_button = false;
-        if (!this.$buttons) { // Ensures that this is only done once
-            add_button = true;
-        }
-        //
-        this._super.apply(this, arguments); // Sets this.$buttons
-        if(add_button) {
-           // alert('1');
-            this.$buttons.on('click', '.o_list_button_import', function() {
-                glocontext=self.getParent().action.context || {};
+     this.$buttons.on('click', '.upload_action', function() {
                 self.do_action({
                     type: 'ir.actions.client',
-                    tag: 'import',
+                    tag: 'upload_action',
                     params: {
                         model: self.dataset.model,
                         // self.dataset.get_context() could be a compound?
@@ -87,12 +67,9 @@ ListView.include({
                 });
                 return false;
             });
-        }
-        return this.$buttons;
-    }
-});
 
-var DataImport = Widget.extend(ControlPanelMixin, {
+
+var EaDataImport = Widget.extend(ControlPanelMixin, {
     template: 'ImportView',
     opts: [
         {name: 'encoding', label: _lt("Encoding:"), value: 'utf-8'},
@@ -426,7 +403,7 @@ var DataImport = Widget.extend(ControlPanelMixin, {
                     xi['name']=$(el).select2('val') || false;
                     return xi;
         }).get();
-        //alert(fields);
+        alert(fields);
         return this.call_import({ dryrun: false }).done(function (message) {
             alert(message);
             if (!_.any(message, function (message) {
@@ -524,11 +501,12 @@ var DataImport = Widget.extend(ControlPanelMixin, {
             }));
     },
 });
-core.action_registry.add('import', DataImport);
+
+core.action_registry.add('upload_action', EaDataImport);
 
 // FSM-ize DataImport
 StateMachine.create({
-    target: DataImport.prototype,
+    target: EaDataImport.prototype,
     events: [
         { name: 'loaded_file',
           from: ['none', 'file_loaded', 'preview_error', 'preview_success', 'results'],

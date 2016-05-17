@@ -26,6 +26,7 @@ import re
 import MySQLdb as mdb
 import datetime
 from openerp.exceptions import UserError,Warning
+from openerp.http import request, serialize_exception as _serialize_exception
 from cStringIO import StringIO
 try:
     from ftplib import FTP_TLS
@@ -150,6 +151,7 @@ class ea_import_chain(osv.osv):
         return True
 
     def import_to_db(self, cr, uid, ids, context={}, csv_reader=False):
+
         if not csv_reader:
             time_of_start = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
             context.update({'time_of_start': time_of_start})
@@ -157,8 +159,10 @@ class ea_import_chain(osv.osv):
             context['log_id'] = []
             context['import_log'] = []
         result_pool = self.pool.get('ea_import.chain.result')
+
         log_pool = self.pool.get('ea_import.log')
         for chain in self.browse(cr, uid, ids, context=context):
+            #print(chain)
             if not chain.type:
                 raise Warning(('Error !'), ("No connection type specified!"))
             if chain.type == 'csv' and not csv_reader:
@@ -190,21 +194,31 @@ class ea_import_chain(osv.osv):
                     model_name = template.target_model_id.model
                     #print(model_name)
                     result_id = template.generate_record(record_list, row_number, context=context)
-
+                    fields = []
+                    for template_line in template.line_ids:
+                        field_name = template_line.target_field.name
+                        fields.append(field_name)
+                    result[model_name]['lines'] = fields
                     result[model_name]['ids'] = result[model_name]['ids'] | set(result_id)
 
-            for name, imported_ids, post_import_hook in [(name, value['ids'], value['post_import_hook']) for name, value in result.iteritems()]:
-                # print(name)
-                # print(imported_ids)
-                # print(post_import_hook)
-                #print('@@@@@@@@@@@@@@@@')
+            for name, imported_ids, post_import_hook,lines in [(name, value['ids'], value['post_import_hook'],value['lines']) for name, value in result.iteritems()]:
+
                 if post_import_hook and hasattr(self.pool.get(name), post_import_hook):
                     getattr(self.pool.get(name), post_import_hook)(cr, uid, list(imported_ids), context=context)
-                result_ids_file = base64.b64encode(str(list(imported_ids)))
+
+
+                Model=request.session.model(name)
+                import_data = Model.export_data(list(imported_ids), lines, True, context=context).get('datas',[])
+                #print(self.from_data(lines,import_data))
+                result_ids_file = base64.b64encode(self.from_data(lines,import_data))
+                result_ids_ids = base64.b64encode(str(list(imported_ids)))
+                # print(result_ids_file)
+                #result_ids_file = base64.b64encode(str(list(imported_ids)))
                 result_ids = result_pool.create(cr, uid, {
                     'chain_id': chain.id,
-                    'result_ids_file': result_ids_file,
-                    'name': name,
+                    'result_ids_file': result_ids_ids,
+                    'result_ids_csv': result_ids_file,
+                        'name': name,
                     'import_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                 })
                 context['result_ids'].append(result_ids)
@@ -223,6 +237,34 @@ class ea_import_chain(osv.osv):
             })
             context['log_id'].append(log_id)
         return True
+
+    def from_data(self, fields, rows):
+        #print('1111')
+        fp = StringIO()
+        writer = csv.writer(fp, quoting=csv.QUOTE_ALL)
+
+        writer.writerow([name.encode('utf-8') for name in fields])
+
+        for data in rows:
+            #print(data)
+            row = []
+            for d in data:
+
+                if isinstance(d, basestring):
+                    d = d.replace('\n',' ').replace('\t',' ')
+
+                    try:
+                        d = d.encode('utf-8')
+                    except UnicodeError:
+                        pass
+                if d is False: d = None
+                row.append(d)
+            writer.writerow(row)
+
+        fp.seek(0)
+        data = fp.read()
+        fp.close()
+        return data
 
     def create_action(self, cr, uid, ids, context=None):
         vals = {}

@@ -165,6 +165,8 @@ class product_template(osv.Model):
     'store':fields.char("专卖店"),
     'test_code':fields.char("检测号"),
     'brand_name': fields.related('brand_id', 'name', type='char', string='品牌名称'),
+    # 'p_id': fields.related('brand_id', 'id', type='char', string='品牌名称'),
+
     # 'import_patch': fields.char('批次', required=True, translate=True, select=True,copy=False, readonly=True),
 
     }
