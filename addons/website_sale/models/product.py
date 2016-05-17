@@ -152,7 +152,7 @@ class product_template(osv.Model):
         'website_sequence': fields.integer('Sequence', help="Determine the display order in the Website E-commerce"),
         'public_categ_ids': fields.many2many('product.public.category', string='Website Product Category', help="Those categories are used to group similar products for e-commerce."),
 
-    'percentage':fields.char('成色1'),
+    'percentage':fields.char('成色'),
     'inlay':fields.char('彩石'),
     'remarks' :fields.text("备注"),
     'product_name' :fields.text("品名"),
@@ -165,6 +165,7 @@ class product_template(osv.Model):
     'store':fields.char("专卖店"),
     'test_code':fields.char("检测号"),
     'brand_name': fields.related('brand_id', 'name', type='char', string='品牌名称'),
+    'purity':fields.char("含量"),
     # 'p_id': fields.related('brand_id', 'id', type='char', string='品牌名称'),
 
     # 'import_patch': fields.char('批次', required=True, translate=True, select=True,copy=False, readonly=True),
